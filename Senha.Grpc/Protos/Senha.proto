@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option csharp_namespace = "Senha.Grpc.Protos";
+
+service SenhaService {
+	rpc GetSenha (GetSenhaRequest) returns (SenhaModel);
+	rpc CreateSenha (CreateSenhaRequest) returns (SenhaModel);
+	rpc UpdateSenha (UpdateSenhaRequest) returns (SenhaModel);
+	rpc DeleteSenha (DeleteSenhaRequest) returns (DeleteSenhaResponse);
+}
+
+message SenhaModel {
+	int32 Id = 1;
+	string SenhaCliente = 2;
+	string SenhaClienteCifrada = 3;
+	int32 Status = 4;
+}
+
+message GetSenhaRequest {
+	int32 Id = 1;
+}
+
+message CreateSenhaRequest {
+	SenhaModel Senha =  1;
+}
+
+message UpdateSenhaRequest {
+	SenhaModel Senha =  1;
+}
+
+message DeleteSenhaRequest {
+	int32 Id = 1;
+}
+
+message DeleteSenhaResponse {
+	bool Successo = 1;
+}

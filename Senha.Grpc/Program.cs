@@ -1,3 +1,4 @@
+using Senha.Grpc.Adapter.Mongo.Entities;
 using Senha.Grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddGrpc();
 
+builder.Services.Configure<SenhaDatabaseConfig>(builder.Configuration.GetSection("SenhaDatabase"));
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 app.MapGrpcService<SenhaClienteService>();

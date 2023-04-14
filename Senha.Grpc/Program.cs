@@ -1,4 +1,5 @@
 using Senha.Grpc.Adapter.Mongo.Entities;
+using Senha.Grpc.Adapter.Mongo.Services;
 using Senha.Grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddGrpc();
 
 builder.Services.Configure<SenhaDatabaseConfig>(builder.Configuration.GetSection("SenhaDatabase"));
+builder.Services.AddSingleton<SenhaMongoService>();
 var app = builder.Build();
 
 

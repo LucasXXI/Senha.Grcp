@@ -10,18 +10,19 @@ service SenhaService {
 }
 
 message SenhaModel {
-	int32 Id = 1;
-	string SenhaCliente = 2;
-	string SenhaClienteCifrada = 3;
-	int32 Status = 4;
+	string Id = 1;
+	int32 IdCliente = 2;
+	string SenhaCliente = 3;
+	string SenhaClienteCifrada = 4;
+	int32 Status = 5;
 }
 
 message GetSenhaRequest {
-	int32 Id = 1;
+	string Id = 1;
 }
 
 message CreateSenhaRequest {
-	SenhaModel Senha =  1;
+	int32 IdClienteRef =  1;
 }
 
 message UpdateSenhaRequest {
@@ -29,7 +30,7 @@ message UpdateSenhaRequest {
 }
 
 message DeleteSenhaRequest {
-	int32 Id = 1;
+	string Id = 1;
 }
 
 message DeleteSenhaResponse {

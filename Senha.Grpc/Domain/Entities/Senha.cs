@@ -10,13 +10,17 @@ namespace Senha.Grpc.Domain.Entities
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+        [BsonElement("ClienteRef")]
+        public int IdCliente { get; set; }
+
         [BsonElement("SenhaCliente")]
         public string SenhaCliente { get; set; } = null!;
-        
+
         [BsonElement("SenhaClienteCifrada")]
         public string SenhaClienteCifrada { get; set; }
 
         [BsonElement("Status")]
-        public ESenhaStatus Status { get; set; } 
+        public ESenhaStatus Status { get; set; }
+
     }
 }

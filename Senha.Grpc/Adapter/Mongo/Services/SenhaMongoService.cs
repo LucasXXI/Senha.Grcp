@@ -1,13 +1,15 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Senha.Grpc.Adapter.Mongo.Entities;
+using Senha.Grpc.Adapter.Mongo.NovaPasta;
 using Senha.Grpc.Domain.Entities;
 using Senha.Grpc.Domain.UseCases;
 using Senha.Grpc.Protos;
+using System.Text.Json;
 
 namespace Senha.Grpc.Adapter.Mongo.Services
 {
-    public class SenhaMongoService
+    public class SenhaMongoService : ISenhaMongoService
     {
         private readonly IMongoCollection<SenhaClass> _senhaCollection;
 
@@ -26,20 +28,44 @@ namespace Senha.Grpc.Adapter.Mongo.Services
         public async Task<SenhaClass?> GetSenhaAsync(string id) 
             => await _senhaCollection.Find( x => x.Id == id).FirstOrDefaultAsync();
 
-        public async Task<SenhaClass> CreateSenhaAsync(int clientId) 
-        { 
+        public async Task<SenhaClass> CreateSenhaAsync(int idClienteRef) 
+        {
             var criarNovaSenha = new UseCaseCriarNovaSenha();
+            var a = criarNovaSenha.NovaSenha(idClienteRef);
 
-            await _senhaCollection.InsertOneAsync(criarNovaSenha.NovaSenha(clientId));
+            try
+            {
+                await _senhaCollection.InsertOneAsync(a);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
 
-            return criarNovaSenha.NovaSenha(clientId);
+            return a;
         }
 
-        public async Task UpdateAsync(string id, SenhaClass senhaAtualizada) =>
-            await _senhaCollection.ReplaceOneAsync(x => x.Id == id, senhaAtualizada);
+        public async Task UpdateAsync(SenhaClass senhaAtualizada)
+        {
+            try
+            {
+                await _senhaCollection.ReplaceOneAsync(x => x.Id == senhaAtualizada.Id, senhaAtualizada);
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 
-        public async Task RemoveAsync(string id) =>
-           await _senhaCollection.DeleteOneAsync(x => x.Id == id);
+        public async Task RemoveAsync(string id)
+        {
+            try
+            {
+                await _senhaCollection.DeleteOneAsync(x => x.Id == id);
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 
     }
 }

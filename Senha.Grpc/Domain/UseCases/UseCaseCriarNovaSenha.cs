@@ -8,7 +8,6 @@ namespace Senha.Grpc.Domain.UseCases
         {
             return new SenhaClass()
             {
-                Id = "ASDFASDFASD",
                 IdCliente = idClientRef,
                 SenhaCliente = "AAAATeste",
                 SenhaClienteCifrada = "AAAATESTEAAA123",

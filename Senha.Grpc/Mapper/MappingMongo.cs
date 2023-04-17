@@ -18,7 +18,7 @@ namespace Senha.Grpc.Mapper
             };
         }
 
-        public static SenhaClass ProtoToMongo(SenhaModel ProtoObj)
+        public static SenhaClass ProtoToClass(SenhaModel ProtoObj)
         {
             return new SenhaClass
             {

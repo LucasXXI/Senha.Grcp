@@ -26,8 +26,14 @@ namespace Senha.Grpc.Adapter.Mongo.Services
         public async Task<SenhaClass?> GetSenhaAsync(string id) 
             => await _senhaCollection.Find( x => x.Id == id).FirstOrDefaultAsync();
 
-        public async Task CreateSenhaAsync(UseCaseCriarNovaSenha criarNovaSenha) =>
-            await _senhaCollection.InsertOneAsync(criarNovaSenha.NovaSenha(3));
+        public async Task<SenhaClass> CreateSenhaAsync(int clientId) 
+        { 
+            var criarNovaSenha = new UseCaseCriarNovaSenha();
+
+            await _senhaCollection.InsertOneAsync(criarNovaSenha.NovaSenha(clientId));
+
+            return criarNovaSenha.NovaSenha(clientId);
+        }
 
         public async Task UpdateAsync(string id, SenhaClass senhaAtualizada) =>
             await _senhaCollection.ReplaceOneAsync(x => x.Id == id, senhaAtualizada);

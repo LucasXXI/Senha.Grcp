@@ -26,4 +26,6 @@
     <Protobuf Include="Protos\Senha.proto" GrpcServices="Server" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="https://json.schemastore.org/minecraft-biome.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

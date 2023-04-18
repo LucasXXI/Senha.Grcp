@@ -2,8 +2,8 @@
 {
     public enum ESenhaStatus
     {
-        PRIMEIRA_SENHA = 1,
-        SENHA_ALTERADA = 2,
-        SENHA_INATIVA = 3
+        PRIMEIRA_SENHA = 0,
+        SENHA_ALTERADA = 1,
+        SENHA_INATIVA = 2
     }
 }

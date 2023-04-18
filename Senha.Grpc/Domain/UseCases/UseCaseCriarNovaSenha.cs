@@ -4,16 +4,15 @@ namespace Senha.Grpc.Domain.UseCases
 {
     public class UseCaseCriarNovaSenha
     {
-        public static SenhaClass NovaSenha(int idClientRef)
+        public static SenhaClass NovaSenha(string senhaClienteRef)
         {
             return new SenhaClass()
             {
-                IdCliente = idClientRef,
-                SenhaCliente = "AAAATeste",
-                SenhaClienteCifrada = "AAAATESTEAAA123",
+                SenhaCliente = senhaClienteRef,
+                SenhaClienteCifrada = senhaClienteRef.GetHashCode(),
                 Status = Enums.ESenhaStatus.PRIMEIRA_SENHA
             };
         }
-        
+
     }
 }

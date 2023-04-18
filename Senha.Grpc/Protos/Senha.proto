@@ -10,19 +10,24 @@ service SenhaService {
 }
 
 message SenhaModel {
+	
+	enum EnumStatus{
+	PRIMEIRA_SENHA = 0;
+	SENHA_ALTERADA = 1;
+	SENHA_INATIVA = 2;
+	}
 	string Id = 1;
-	int32 IdCliente = 2;
-	string SenhaCliente = 3;
-	string SenhaClienteCifrada = 4;
-	int32 Status = 5;
+	string SenhaCliente = 2;
+	EnumStatus Status = 3;
 }
+
 
 message GetSenhaRequest {
 	string Id = 1;
 }
 
 message CreateSenhaRequest {
-	int32 IdClienteRef =  1;
+	string SenhaCliente =  1;
 }
 
 message UpdateSenhaRequest {

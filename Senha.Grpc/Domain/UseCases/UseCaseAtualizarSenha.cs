@@ -9,10 +9,9 @@ namespace Senha.Grpc.Domain.UseCases
             return new SenhaClass
             {
                 Id = senhaClass.Id,
-                IdCliente = senhaClass.IdCliente,
                 SenhaCliente = senhaClass.SenhaCliente,
-                SenhaClienteCifrada = senhaClass.SenhaClienteCifrada,
-                Status = senhaClass.Status,
+                SenhaClienteCifrada = senhaClass.SenhaCliente.GetHashCode(),
+                Status = Enums.ESenhaStatus.SENHA_ALTERADA
             };
         }
     }

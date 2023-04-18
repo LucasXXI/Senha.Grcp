@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using Grpc.Core;
+﻿using Grpc.Core;
 using Senha.Grpc.Adapter.Mongo.Interfaces;
-using Senha.Grpc.Adapter.Mongo.Services;
 using Senha.Grpc.Domain.Entities;
 using Senha.Grpc.Mapper;
 using Senha.Grpc.Protos;
@@ -25,7 +23,7 @@ namespace Senha.Grpc.Services
 
             if (senhaRetorno is null)
             {
-               throw new ArgumentNullException(nameof(senhaRetorno));
+                throw new ArgumentNullException(nameof(senhaRetorno));
             }
 
             return MappingMongo.MongoToProto(senhaRetorno);
@@ -33,7 +31,7 @@ namespace Senha.Grpc.Services
 
         public override async Task<SenhaModel> CreateSenha(CreateSenhaRequest request, ServerCallContext context)
         {
-            var novaSenha = await _mongoService.CreateSenhaAsync(request.IdClienteRef);
+            var novaSenha = await _mongoService.CreateSenhaAsync(request.SenhaCliente);
 
             return MappingMongo.MongoToProto(novaSenha);
         }
@@ -43,9 +41,8 @@ namespace Senha.Grpc.Services
             var senhaToUpdate = new SenhaClass
             {
                 Id = request.Senha.Id,
-                IdCliente = request.Senha.IdCliente,
                 SenhaCliente = request.Senha.SenhaCliente,
-                SenhaClienteCifrada = request.Senha.SenhaClienteCifrada,
+                Status = (Domain.Enums.ESenhaStatus)request.Senha.Status
             };
 
             await _mongoService.UpdateAsync(senhaToUpdate);

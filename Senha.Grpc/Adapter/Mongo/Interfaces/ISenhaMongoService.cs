@@ -1,6 +1,6 @@
 ﻿using Senha.Grpc.Domain.Entities;
 
-namespace Senha.Grpc.Adapter.Mongo.NovaPasta
+namespace Senha.Grpc.Adapter.Mongo.Interfaces
 {
     public interface ISenhaMongoService
     {

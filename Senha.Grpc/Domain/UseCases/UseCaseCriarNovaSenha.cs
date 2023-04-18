@@ -4,7 +4,7 @@ namespace Senha.Grpc.Domain.UseCases
 {
     public class UseCaseCriarNovaSenha
     {
-        public SenhaClass NovaSenha(int idClientRef)
+        public static SenhaClass NovaSenha(int idClientRef)
         {
             return new SenhaClass()
             {

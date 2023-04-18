@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Senha.Grpc.Adapter.Mongo.Entities;
-using Senha.Grpc.Adapter.Mongo.NovaPasta;
+using Senha.Grpc.Adapter.Mongo.Interfaces;
 using Senha.Grpc.Domain.Entities;
 using Senha.Grpc.Domain.UseCases;
 using Senha.Grpc.Protos;
@@ -30,23 +30,23 @@ namespace Senha.Grpc.Adapter.Mongo.Services
 
         public async Task<SenhaClass> CreateSenhaAsync(int idClienteRef) 
         {
-            var criarNovaSenha = new UseCaseCriarNovaSenha();
-            var a = criarNovaSenha.NovaSenha(idClienteRef);
+            var criarNovaSenha = UseCaseCriarNovaSenha.NovaSenha(idClienteRef);
 
             try
             {
-                await _senhaCollection.InsertOneAsync(a);
+                await _senhaCollection.InsertOneAsync(criarNovaSenha);
             }catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            
 
-            return a;
+            return criarNovaSenha;
         }
 
-        public async Task UpdateAsync(SenhaClass senhaAtualizada)
+        public async Task UpdateAsync(SenhaClass updatedSenha)
         {
+            var senhaAtualizada = UseCaseAtualizarSenha.AtualizarSenha(updatedSenha);
+
             try
             {
                 await _senhaCollection.ReplaceOneAsync(x => x.Id == senhaAtualizada.Id, senhaAtualizada);

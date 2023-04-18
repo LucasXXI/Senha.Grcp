@@ -1,5 +1,5 @@
 using Senha.Grpc.Adapter.Mongo.Entities;
-using Senha.Grpc.Adapter.Mongo.NovaPasta;
+using Senha.Grpc.Adapter.Mongo.Interfaces;
 using Senha.Grpc.Adapter.Mongo.Services;
 using Senha.Grpc.Services;
 

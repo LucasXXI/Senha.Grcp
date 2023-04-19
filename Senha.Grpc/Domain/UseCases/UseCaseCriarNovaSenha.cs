@@ -6,12 +6,13 @@ namespace Senha.Grpc.Domain.UseCases
     {
         public static SenhaClass NovaSenha(string senhaClienteRef)
         {
-            return new SenhaClass()
+            var retorno = new SenhaClass()
             {
                 SenhaCliente = senhaClienteRef,
                 SenhaClienteCifrada = senhaClienteRef.GetHashCode(),
                 Status = Enums.ESenhaStatus.PRIMEIRA_SENHA
             };
+            return retorno;
         }
 
     }

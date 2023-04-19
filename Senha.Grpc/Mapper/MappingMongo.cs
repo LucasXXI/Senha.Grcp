@@ -7,12 +7,13 @@ namespace Senha.Grpc.Mapper
     {
         public static SenhaModel MongoToProto(SenhaClass MongoObj)
         {
-            return new SenhaModel
+            var retorno = new SenhaModel
             {
                 Id = MongoObj.Id,
                 SenhaCliente = MongoObj.SenhaCliente,
                 Status = (SenhaModel.Types.EnumStatus)MongoObj.Status,
             };
+            return retorno;
         }
     }
 }

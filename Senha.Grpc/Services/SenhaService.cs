@@ -42,7 +42,7 @@ namespace Senha.Grpc.Services
             {
                 Id = request.Senha.Id,
                 SenhaCliente = request.Senha.SenhaCliente,
-                Status = (Domain.Enums.ESenhaStatus)request.Senha.Status
+                Status = (Domain.Enums.ESenhaStatus)(int)request.Senha.Status
             };
 
             await _mongoService.UpdateAsync(senhaToUpdate);
